@@ -1,0 +1,235 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: FuenteLinda;
+    src: url(./assets/NeueMontreal-Bold.otf) format('opentype');
+    font-weight: normal; 
+    font-style: normal; 
+}
+
+body {
+    background-color: violet;
+}
+
+button {
+    border: none;
+    background: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    font-size: inherit;
+    color: inherit;
+}
+
+p {
+    color: blueviolet;
+    font-family: Fuentelinda;
+    font-size: 30px;
+    
+}
+
+.flex-container {
+    display: flex;
+    justify-content: space-between; /* Coloca los elementos al principio y al final del contenedor */
+    align-items: center; /* Alinea verticalmente los elementos si tienen diferentes alturas */
+}
+
+/* HEADER */
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 15vh; /* Ajusta la altura para centrar verticalmente */
+}
+
+.fuentepupi {
+    color: blueviolet;
+    font-family: FuenteLinda;
+    font-size: 50px;
+    transition: color 0.3s, text-shadow 0.3s;
+}
+
+.playlist {
+    display: inline; /* Hacer que el h1 sea inline */
+    vertical-align: center; /* Alinear verticalmente con respecto al contenido */
+    margin-right: 10px;
+}
+
+
+.centrarPlaylist {
+    margin-left: 20px;
+}
+
+.fuentepupi:hover {
+    color: #af2792; /* Cambia el color al pasar el mouse por encima */
+    text-shadow: 0 0 10px #ff69b4; /* Agrega un efecto de sombra para el brillo */
+}
+
+/* ANIMACION DE LOS PUPIS */
+
+.contenedor-imagenes {
+    position: relative;
+    width: 100%;
+    height: 80vh;
+}
+
+.imagen {
+    position: absolute;
+    width: 120px; /* Ajusta el tamaño de las imágenes */
+    /* Animación de caída */
+    animation-name: caida;
+    animation-duration: 2s; /* Duración de la caída (1 segundo) */
+    animation-timing-function: linear; /* Movimiento uniforme */
+    animation-fill-mode: forwards; /* Mantener la última posición */
+    opacity: 1; /* Inicialmente visible */
+}
+
+/* Definición de la animación de caída */
+@keyframes caida {
+    0% {
+        transform: translateY(-100%); /* Comienza arriba de la pantalla */
+    }
+    100% {
+        transform: translateY(130vh); /* Termina abajo de la pantalla */
+        opacity: 0; /* Desaparece al final */
+    }
+}
+
+/* Fotos */
+
+.galeria {
+	font-family: Lato, sans-serif;
+	margin: 0;
+	padding: 1rem;
+	min-height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: rgb(158, 65, 158);
+}
+
+.fotito {
+	width: 100%;
+	display: block;
+	aspect-ratio: 1 / 1;
+	object-fit: cover;
+	transition: transform 1000ms;
+}
+
+.lista {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: grid;
+	gap: 0.5rem;
+	grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+	max-width: 100%;
+	width: 70rem;
+}
+
+figure {
+	margin: 0;
+	position: relative;
+	overflow: hidden;
+}
+
+figure::after {
+	content: '';
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 200%;
+	height: 200%;
+	background: rgba(0, 0, 0, 0.5);
+	transform-origin: center;
+	opacity: 0;
+	transform: scale(2);
+	transition: opacity 300ms;
+}
+
+figcaption {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	place-items: center;
+	text-align: center;
+	padding: 1rem;
+	color: white;
+	font-size: 1.2rem;
+	z-index: 1;
+	opacity: 0;
+	transition: opacity 600ms, transform 600ms;
+}
+
+a:is(:hover, :focus) figure::after {
+	opacity: 1;
+}
+
+a:is(:hover, :focus) figcaption {
+	opacity: 1;
+	transition: opacity 600ms;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	figcaption {
+		transform: translate3d(0, 2rem, 0);
+	}
+	
+	figure::after {
+		border-radius: 50%;
+		opacity: 1;
+		transform: scale(0);
+		transition: transform 900ms;
+	}
+	
+	a:is(:hover, :focus) figure::after {
+		transform: scale(2.5);
+	}
+
+	a:is(:hover, :focus) figcaption {
+		opacity: 1;
+		transform: translate3d(0, 0, 0);
+		transition: opacity 600ms 400ms, transform 600ms 400ms;
+	}
+
+	a:is(:hover, :focus) img {
+		transform: scale(1.2);
+	}
+}
+
+/* gatuelines */
+
+.contenedor {
+    display: flex;
+    align-items: flex-start; /* Alinea los elementos arriba */
+    justify-content: space-between; /* Espacio entre el iframe y las filas */
+    padding: 20px; /* Espacio alrededor del contenido */
+}
+
+.izquierda {
+    width: 30%; /* Ancho del iframe */
+}
+
+.derecha {
+    width: 65%; /* Ancho del área de las filas de GIFs */
+}
+
+.fila {
+    display: flex;
+    flex-wrap: wrap; /* Permite que las imágenes se envuelvan en varias filas */
+    gap: 20px; /* Espacio entre las imágenes */
+}
+
+.fila img {
+    max-width: 100%; /* Evita que las imágenes se desborden en tamaños más pequeños */
+    height: auto; /* Mantiene la proporción de aspecto */
+}
